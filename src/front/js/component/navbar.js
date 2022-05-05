@@ -1,19 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+  const history = useHistory();
+
+  const logOut = async () => {
+    localStorage.removeItem("token");
+  };
+
+  return (
+    <nav className="navbar navbar-light bg-light">
+      <div className="container">
+        <Link to="/">
+          <span className="navbar-brand mb-0 h1">React Boilerplate</span>
+        </Link>
+        <div className="float-end">
+          <Link to="/signup">
+            <button className="btn btn-primary">Signup</button>
+          </Link>
+          {localStorage.getItem("token") ? (
+            <button
+              onClick={() => {
+                logOut(), history.push("/login"), location.reload();
+              }}
+              className="btn btn-secondary mx-2"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to="/login">
+              <button className="btn btn-secondary mx-2">Login</button>
+            </Link>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
 };
