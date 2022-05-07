@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 export const Private = () => {
-  const [greeting, setGreeting] = useState();
-  const [error, setError] = useState("No authorized");
+  const [error, setError] = useState('');
 
   useEffect(() => {
     accessPrivate();
-    window.onload();
   }, []);
 
-  // Esta función permite recargar la pág. solo una vez //
-  window.onload = function () {
-    if (!window.location.hash) {
-      window.location = window.location + "#loaded";
-      window.location.reload();
-    }
-  };
 
   const accessPrivate = async () => {
     setError(null);
@@ -29,6 +20,9 @@ export const Private = () => {
       }
     );
     const data = await response.json();
+    if(!localStorage.getItem("token")){
+      setError("No authorized")
+    }
   };
 
   if (localStorage.getItem("token")) {
@@ -56,6 +50,6 @@ export const Private = () => {
       </div>
     );
   } else {
-    return <h1 className="text-center mt-5">{error}</h1>;
+   return (<h1 className="text-center mt-5">{error}</h1>);
   }
 };

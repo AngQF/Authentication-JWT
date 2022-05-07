@@ -32,7 +32,7 @@ def login_user():
     #------------------------------------------------------------------------------------------------#    
         if user:
             access_token = create_access_token(identity=user.id)
-            return jsonify({"logged":True, "token": "access_token"}), 200
+            return jsonify({"logged":True, "token": access_token}), 200
         else: return jsonify({"logged":False, "msg": "Access denied"}), 400
 
     else: return jsonify({"msg": "Error, please check email or password"}), 400    

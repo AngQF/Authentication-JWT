@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 export const Navbar = () => {
   const history = useHistory();
+	const [style, setStyle] = useState({ display: "inline-block" });
 
   const logOut = async () => {
     localStorage.removeItem("token");
@@ -22,14 +23,14 @@ export const Navbar = () => {
           {localStorage.getItem("token") ? (
             <button
               onClick={() => {
-                logOut(), history.push("/login"), location.reload();
+                logOut(), history.push("/login"), setStyle({display: "inline-block"})
               }}
               className="btn btn-secondary mx-2"
             >
               Logout
             </button>
           ) : (
-            <Link to="/login">
+            <Link to="/login" style={style}>
               <button className="btn btn-secondary mx-2">Login</button>
             </Link>
           )}

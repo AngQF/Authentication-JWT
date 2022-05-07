@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 export const Login = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState();
-  const [type, setType] = useState("button");
   const history = useHistory();
 
   const saveUsersInDB = async () => {
@@ -65,10 +64,7 @@ export const Login = () => {
           type="button"
           className="btn btn-primary"
           onClick={() => {
-            saveUsersInDB(),
-              user.email.trim() != "" && user.password.trim() != ""
-                ? setType("button")
-                : setType("button");
+            saveUsersInDB();
           }}
         >
           Submit

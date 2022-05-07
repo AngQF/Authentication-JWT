@@ -57,10 +57,10 @@ export const Signup = () => {
           type={type}
           className="btn btn-primary"
           onClick={(e) =>
-            saveUsersInDB() &&
+            {saveUsersInDB(),
             (user.email.trim() != "" && user.password.trim() != ""
               ? setType("submit")
-              : setType("button"))
+              : setType("button"))}
           }
         >
           Submit
