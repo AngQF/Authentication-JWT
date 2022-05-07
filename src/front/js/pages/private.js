@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import {Context} from "../store/appContext";
 
 export const Private = () => {
   const [error, setError] = useState('');
+  const {actions} = useContext(Context);
 
   useEffect(() => {
     accessPrivate();
+    actions.changeBtnStyle();
   }, []);
 
 

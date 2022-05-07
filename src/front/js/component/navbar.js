@@ -1,10 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { Link } from "react-router-dom";
+import {Context} from "../store/appContext";
 import { useHistory } from "react-router-dom";
 
 export const Navbar = () => {
   const history = useHistory();
 	const [style, setStyle] = useState({ display: "inline-block" });
+  const {store} = useContext(Context);
+
+
+
 
   const logOut = async () => {
     localStorage.removeItem("token");
@@ -26,6 +31,7 @@ export const Navbar = () => {
                 logOut(), history.push("/login"), setStyle({display: "inline-block"})
               }}
               className="btn btn-secondary mx-2"
+              style={store.btnLogoutStyle}
             >
               Logout
             </button>
